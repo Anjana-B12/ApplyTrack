@@ -14,6 +14,7 @@ ApplyTrack is a web-based job application tracking system that helps users organ
 - **Sorting** – Sort applications by newest, oldest, or company name.
 - **Pagination** – Browse applications across multiple pages.
 - **Application Statistics** – Track application statuses through dashboard summaries.
+- **Application Status Chart** – Visualize application status distribution using an interactive doughnut chart powered by Chart.js.
 
 ## Tech Stack
 
@@ -34,6 +35,7 @@ ApplyTrack is a web-based job application tracking system that helps users organ
 - express-session
 - Joi
 - method-override
+- Chart.js
 
 ## Installation and Setup
 
@@ -69,10 +71,11 @@ ApplyTrack is a web-based job application tracking system that helps users organ
 
 ## Future Improvements
 
-- Add application status charts.
 - Improve dashboard analytics.
+- Add more application insights and visualizations.
 - Add deployment support.
 
 ## Author
 
 Developed as a hands-on full-stack web development learning project.
+
