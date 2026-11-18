@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 
-<body>
+<body class="bg-light d-flex flex-column min-vh-100">
     <%- include("partials/navbar.ejs") %>
         <% if(success) { %>
             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -21,8 +21,8 @@
                 <div class="container mt-3 mb-5">
                     <h2>Welcome, <%= user.username %>!</h2>
 
-                    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-5 g-3 mt-3 mb-4">
-                        <div class="col">
+                    <div class="row g-2 g-md-3 mt-3 mb-4">
+                        <div class="col-12 col-lg-4">
                             <div class="card shadow-sm h-100">
                                 <div class="card-body">
                                     <h6>Total Applications</h6>
@@ -32,7 +32,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col">
+                        <div class="col-6 col-lg-2">
                             <div class="card shadow-sm h-100">
                                 <div class="card-body">
                                     <h6>Applied</h6>
@@ -42,7 +42,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col">
+                        <div class="col-6 col-lg-2">
                             <div class="card shadow-sm h-100">
                                 <div class="card-body">
                                     <h6>Interviews</h6>
@@ -52,7 +52,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col">
+                        <div class="col-6 col-lg-2">
                             <div class="card shadow-sm h-100">
                                 <div class="card-body">
                                     <h6>Rejected</h6>
@@ -62,7 +62,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col">
+                        <div class="col-6 col-lg-2">
                             <div class="card shadow-sm h-100">
                                 <div class="card-body">
                                     <h6>Offers</h6>
@@ -71,6 +71,25 @@
                                     </h3>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+
+                    <div class="card shadow-sm p-3 mb-4">
+                        <h5 class="mb-3">Application Status Overview</h5>
+                        <div style="max-width: 400px; margin: auto;">
+                            <% if (totalApplications> 0) { %>
+
+                                <canvas id="applicationChart"></canvas>
+
+                                <% } else { %>
+
+                                    <div class="text-center py-4">
+                                        <h6>No applications yet!</h6>
+                                        <p class="text-muted">
+                                            Add your first job application to see your chart.
+                                        </p>
+                                    </div>
+                                    <% } %>
                         </div>
                     </div>
 
@@ -174,7 +193,44 @@
 
                     </div>
                 </div>
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                <script>
+                    const appliedCount = <%- JSON.stringify(appliedCount) %>;
+                    const interviewCount = <%- JSON.stringify(interviewCount) %>;
+                    const rejectedCount = <%- JSON.stringify(rejectedCount) %>;
+                    const offerCount = <%- JSON.stringify(offerCount) %>;
 
+                    const ctx = document.getElementById("applicationChart");
+
+                    if (ctx) {
+                        new Chart(ctx, {
+                            type: "doughnut",
+
+                            data: {
+                                labels: ["Applied", "Interview", "Rejected", "Offer"],
+
+                                datasets: [{
+                                    data: [
+                                        appliedCount,
+                                        interviewCount,
+                                        rejectedCount,
+                                        offerCount
+                                    ],
+
+                                    backgroundColor: [
+                                        "#3B82F6",
+                                        "#F59E0B",
+                                        "#EF4444",
+                                        "#10B981"
+                                    ],
+
+                                    borderWidth: 0
+                                }]
+                            }
+                        });
+                    }
+
+                </script>
                 <%- include("partials/footer.ejs") %>
 </body>
 
