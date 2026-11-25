@@ -4,15 +4,19 @@ const jobSchema = new mongoose.Schema({
     company: {
         type: String,
         required: true,
-        trim: true
+        trim: true,
+        maxlength: 100
     },
     position: {
         type: String,
         required: true,
-        trim: true
+        trim: true,
+        maxlength: 100
     },
     location: {
-        type: String
+        type: String,
+        trim: true,
+        maxlength: 100
     },
     jobType: {
         type: String,
@@ -28,13 +32,19 @@ const jobSchema = new mongoose.Schema({
         required: true,
     },
     jobLink: {
-        type: String
+        type: String,
+        trim: true,
+        maxlength: 2048
     },
     description: {
-        type: String
+        type: String,
+        trim: true,
+        maxlength: 1000
     },
     notes: {
-        type: String
+        type: String,
+        trim: true,
+        maxlength: 1000
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,
